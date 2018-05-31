@@ -4,6 +4,6 @@ This is a three-dimensional digital space that you can explore with a mouse and 
 
 [Live Demo](http://ethangooding.com/3JSPlayground/)
 
-## Why not make it a more traditional platformer?
+## Why not make a more traditional platformer?
 
 This is an exploratory venture. Mainstream video game design is usually constricted to gameplay mechanics that support a system of punishment and reward, whether through competition or gamification psychology. Independent developers and installation artists, on the other hand, have in recent years been progressively creating more commercially viable digital interactive experiences that don’t fall in any of those traditional categories. These works occupy a space outside of points and upgrades, yet still captivate audiences that sometimes number in the hundreds of millions. I think it’s important to try to explore why that growing user community is attracted to these immersive experiences, in the hopes of better understanding what makes people want to interact with digital technology in general.
