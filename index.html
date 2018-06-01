@@ -152,7 +152,7 @@
 
 
 
-				scene.fog = new THREE.Fog( 0xffffff, 0, 1600 );
+				scene.fog = new THREE.Fog( 0xffffff, 0, 1750 );
 
         // Add light
 				var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
@@ -176,7 +176,7 @@
   					{
   						textureWidth: 512,
   						textureHeight: 512,
-  						waterNormals: new THREE.TextureLoader().load( './textures/Crystal_003_NORM.jpg', function ( texture ) {
+  						waterNormals: new THREE.TextureLoader().load( './textures/resized_crystal.jpg', function ( texture ) {
   							texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
   						}),
   						alpha: 1.0,
@@ -272,18 +272,69 @@
               boxPos.push([80, x, z]);
             }
           }
+
+					// Rings
+					for (var x = -140; x <= 140; x += 20) {
+						boxPos.push([130, x, -650]);
+						boxPos.push([130, x, -670]);
+					}
+
+					for (var x = -210; x <= 210; x += 20) {
+						boxPos.push([180, x, -720]);
+						boxPos.push([180, x, -740]);
+					}
+
+					for (var x = -280; x <= 280; x += 20) {
+						boxPos.push([240, x, -790]);
+						boxPos.push([240, x, -810]);
+					}
+
+					for (var x = -350; x <= 350; x += 20) {
+						boxPos.push([300, x, -860]);
+						boxPos.push([300, x, -880]);
+					}
+
+					for (var z = -460; z >= -640; z -= 20) {
+						boxPos.push([130, -120, z]);
+						boxPos.push([130, -140, z]);
+						boxPos.push([130, 120, z]);
+						boxPos.push([130, 140, z]);
+					}
+
+					for (var z = -460; z >= -710; z -= 20) {
+						boxPos.push([180, -190, z]);
+						boxPos.push([180, -210, z]);
+						boxPos.push([180, 190, z]);
+						boxPos.push([180, 210, z]);
+					}
+
+					for (var z = -460; z >= -780; z -= 20) {
+						console.log(z);
+						boxPos.push([240, -260, z]);
+						boxPos.push([240, -280, z]);
+						boxPos.push([240, 260, z]);
+						boxPos.push([240, 280, z]);
+					}
+
+					for (var z = -460; z >= -850; z -= 20) {
+						console.log(z);
+						boxPos.push([300, -330, z]);
+						boxPos.push([300, -350, z]);
+						boxPos.push([300, 330, z]);
+						boxPos.push([300, 350, z]);
+					}
+
         }
         addToBoxPos(boxPositions);
+
+				// Texture option
+				var marbleTexture = new THREE.TextureLoader().load('./textures/WM_Marble-125_1024.png');
 
         // Set boxes
         for ( var i = 0; i < boxPositions.length; i ++ ) {
 
-          // Texture option:
-					var texture = new THREE.TextureLoader().load('./textures/corru.png');
-
           var boxMaterial = new THREE.MeshPhysicalMaterial( {
-            // map: texture,
-            color: 0xffffff
+            color: 0xe6ffff
           });
 
 					var box = new THREE.Mesh( boxGeometry, boxMaterial );
@@ -294,17 +345,38 @@
 					objects.push( box );
 				}
 
-        // Old randomized box positions
-				// for ( var i = 0; i < 500; i ++ ) {
-				// 	var boxMaterial = new THREE.MeshPhongMaterial( { specular: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-				// 	boxMaterial.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-				// 	var box = new THREE.Mesh( boxGeometry, boxMaterial );
-        //   box.position.y = Math.floor( Math.random() * 20 ) * 20 + 10;
-				// 	box.position.x = Math.floor( Math.random() * 20 - 10 ) * 20;
-				// 	box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20 - 300;
-				// 	scene.add( box );
-				// 	objects.push( box );
-				// }
+
+
+				// Add CIRCLE OF POWER
+				var sphereGeometry = new THREE.SphereBufferGeometry( 200, 32, 32 );
+				var sphereMaterial = new THREE.MeshPhysicalMaterial( {
+					map: marbleTexture,
+					color: 0xffe6ff
+				});
+				var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+				sphere.position.y = 600;
+				sphere.position.x = 0;
+				sphere.position.z = -540;
+				scene.add( sphere );
+
+        // Randomized box positions
+				for ( var i = 0; i < 1500; i ++ ) {
+
+					// Old box colors
+					// var boxMaterial = new THREE.MeshPhongMaterial( { specular: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
+					// boxMaterial.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
+
+					var boxMaterial = new THREE.MeshPhysicalMaterial( {
+						// map: marbleTexture,
+						color: 0xffe6ff
+					});
+					var box = new THREE.Mesh( boxGeometry, boxMaterial );
+          box.position.y = Math.floor( Math.random() * 20 ) * 40 + 300;
+					box.position.x = Math.floor( Math.random() * 20 - 10 ) * 40;
+					box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20 - 1100;
+					scene.add( box );
+					objects.push( box );
+				}
 
 
 
