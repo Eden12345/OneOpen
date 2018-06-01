@@ -121,21 +121,21 @@
 				scene = new THREE.Scene();
 
         // Create sky
-				scene.background = new THREE.Color( 0x944dff );
-        // var sky = new THREE.Sky();
-				// sky.scale.setScalar( 10000 );
-				// scene.add( sky );
-				// var uniforms = sky.material.uniforms;
-				// uniforms.turbidity.value = 10;
-				// uniforms.rayleigh.value = 2;
-				// uniforms.luminance.value = 10;
-				// uniforms.mieCoefficient.value = 0.005;
-				// uniforms.mieDirectionalG.value = 0.8;
-				// var parameters = {
-				// 	distance: 400,
-				// 	inclination: 0.49,
-				// 	azimuth: 0.205
-				// };
+				// scene.background = new THREE.Color( 0x944dff );
+        var sky = new THREE.Sky();
+				sky.scale.setScalar( 10000 );
+				scene.add( sky );
+				var uniforms = sky.material.uniforms;
+				uniforms.turbidity.value = 10;
+				uniforms.rayleigh.value = 2;
+				uniforms.luminance.value = 10;
+				uniforms.mieCoefficient.value = 0.005;
+				uniforms.mieDirectionalG.value = 0.8;
+				var parameters = {
+					distance: 400,
+					inclination: 0.49,
+					azimuth: 0.205
+				};
 
 
 
@@ -151,10 +151,10 @@
         light2.target.position.set(0, 0, -1);
         scene.add( light2.target );
 
-				light2 = new THREE.DirectionalLight( 0xffffff, 0.6 );
-				scene.add( light2 );
-        light2.target.position.set(1, -1, 1);
-        scene.add( light2.target );
+				light3 = new THREE.DirectionalLight( 0xffffff, 0.6 );
+				scene.add( light3 );
+        light3.target.position.set(1, -1, 1);
+        scene.add( light3.target );
 
 
         var waterGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
