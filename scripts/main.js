@@ -93,7 +93,7 @@ function init() {
   var skyboxGeometry = new THREE.CubeGeometry( 3000, 3000, 3000, 1, 1, 1 );
   var skybox = new THREE.Mesh( skyboxGeometry, faceArray );
   skybox.position.z = -1000;
-  skybox.position.y = -10;
+  // skybox.position.y = ;
   scene.add( skybox );
 
 
@@ -136,6 +136,7 @@ function init() {
       }
     );
   crystal.rotation.x = - Math.PI / 2;
+  crystal.position.z = -1000;
   scene.add( crystal );
 
 
