@@ -63,3 +63,9 @@ body {
 #directions p {
   margin: 3px;
 }
+#directions #key-map-title {
+  margin-bottom: 10px;
+}
+#directions #double-jump {
+  margin-top: 15px;
+}
