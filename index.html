@@ -65,9 +65,9 @@
 			var raycaster;
 			var blocker = document.getElementById( 'blocker' );
 			var instructions = document.getElementById( 'instructions' );
-			// http://www.html5rocks.com/en/tutorials/pointerlock/intro/
 			var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
+			// Use logic from Three.js repo for browser pointer-lock
 			if ( havePointerLock ) {
 				var element = document.body;
 				var pointerlockchange = function ( event ) {
@@ -117,10 +117,13 @@
 			animate();
 
 			function init() {
+				//Initiate camera with farther field of view to avoid skybox tearing
 				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 4200 );
 				scene = new THREE.Scene();
 
-        // Create sky using sky module
+        // Create skybox using sky module from water example
+				// (commented out due to compatibility issues)
+				//
 				// scene.background = new THREE.Color( 0x944dff );
         // var sky = new THREE.Sky();
 				// sky.scale.setScalar( 10000 );
@@ -132,20 +135,19 @@
 				// uniforms.mieCoefficient.value = 0.005;
 				// uniforms.mieDirectionalG.value = 0.8;
 
-				// Create traditional skybox
-				var materialArray = [];
-				materialArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side1.png') }));
-				materialArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side2.png' ) }));
-				materialArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/ceil.png' ) }));
-				materialArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/floor.png' ) }));
-				materialArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side3.png' ) }));
-				materialArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side4.png' ) }));
+				// Create traditional skybox and load custom skybox textures
+				var faceArray = [];
+				faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side1.png') }));
+				faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side2.png' ) }));
+				faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/ceil.png' ) }));
+				faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/floor.png' ) }));
+				faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side3.png' ) }));
+				faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side4.png' ) }));
 				for (var i = 0; i < 6; i++) {
-					materialArray[i].side = THREE.BackSide;
+					faceArray[i].side = THREE.BackSide;
 				}
-				// var skyboxMaterial = new THREE.MeshFaceMaterial( materialArray );
-				var skyboxGeom = new THREE.CubeGeometry( 3000, 3000, 3000, 1, 1, 1 );
-				var skybox = new THREE.Mesh( skyboxGeom, materialArray );
+				var skyboxGeometry = new THREE.CubeGeometry( 3000, 3000, 3000, 1, 1, 1 );
+				var skybox = new THREE.Mesh( skyboxGeometry, faceArray );
 				skybox.position.z = -1000;
 				skybox.position.y = -10;
 				scene.add( skybox );
@@ -154,7 +156,7 @@
 
 				scene.fog = new THREE.Fog( 0xffffff, 0, 1750 );
 
-        // Add light
+        // Add lighting
 				var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
 				light.position.set( 0.5, 1, 0.75 );
 				scene.add( light );
@@ -170,9 +172,10 @@
         scene.add( light3.target );
 
 
-        var waterGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
-  				water = new THREE.Water(
-  					waterGeometry,
+				// Add crystal floor using water module
+        var floorGeometry = new THREE.PlaneBufferGeometry( 3100, 3100 );
+  				crystal = new THREE.Water(
+  					floorGeometry,
   					{
   						textureWidth: 512,
   						textureHeight: 512,
@@ -188,10 +191,11 @@
   						fog: scene.fog !== undefined
   					}
   				);
-        water.rotation.x = - Math.PI / 2;
-        scene.add( water );
+        crystal.rotation.x = - Math.PI / 2;
+        scene.add( crystal );
 
 
+				// Use keymapping from Three.js repo
 				controls = new THREE.PointerLockControls( camera );
 				scene.add( controls.getObject() );
 				var onKeyDown = function ( event ) {
@@ -309,7 +313,6 @@
 					}
 
 					for (var z = -560; z >= -880; z -= 20) {
-						console.log(z);
 						boxPos.push([240, -260, z]);
 						boxPos.push([240, -280, z]);
 						boxPos.push([240, 260, z]);
@@ -317,7 +320,6 @@
 					}
 
 					for (var z = -560; z >= -950; z -= 20) {
-						console.log(z);
 						boxPos.push([300, -330, z]);
 						boxPos.push([300, -350, z]);
 						boxPos.push([300, 330, z]);
@@ -347,6 +349,25 @@
 
 
 
+        // Randomized box positions
+				for ( var i = 0; i < 1500; i ++ ) {
+
+					var boxMaterial = new THREE.MeshPhysicalMaterial( {
+						// map: marbleTexture,
+						color: 0xffe6ff
+					});
+					var box = new THREE.Mesh( boxGeometry, boxMaterial );
+
+          box.position.y = Math.floor( Math.random() * 20 ) * 40 + 300;
+					box.position.x = Math.floor( Math.random() * 20 - 10 ) * 40;
+					box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20 - 1200;
+
+					scene.add( box );
+					objects.push( box );
+				}
+
+
+
 				// Add CIRCLE OF POWER
 				var sphereGeometry = new THREE.SphereBufferGeometry( 200, 32, 32 );
 				var sphereMaterial = new THREE.MeshPhysicalMaterial( {
@@ -359,25 +380,6 @@
 				sphere.position.z = -640;
 				scene.add( sphere );
 
-        // Randomized box positions
-				for ( var i = 0; i < 1500; i ++ ) {
-
-					// Old box colors
-					// var boxMaterial = new THREE.MeshPhongMaterial( { specular: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-					// boxMaterial.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-
-					var boxMaterial = new THREE.MeshPhysicalMaterial( {
-						// map: marbleTexture,
-						color: 0xffe6ff
-					});
-					var box = new THREE.Mesh( boxGeometry, boxMaterial );
-          box.position.y = Math.floor( Math.random() * 20 ) * 40 + 300;
-					box.position.x = Math.floor( Math.random() * 20 - 10 ) * 40;
-					box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20 - 1200;
-					scene.add( box );
-					objects.push( box );
-				}
-
 
 
 				// Add doc to renderer
@@ -386,10 +388,10 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
 
-				//
 				window.addEventListener( 'resize', onWindowResize, false );
 			}
 
+			// Handle window resizing
 			function onWindowResize() {
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
@@ -398,6 +400,8 @@
 
 			function animate() {
 				requestAnimationFrame( animate );
+
+				// Use following logic from Three.js repo for collisions and movement
 				if ( controlsEnabled === true ) {
 					raycaster.ray.origin.copy( controls.getObject().position );
 					raycaster.ray.origin.y -= 10;
@@ -434,7 +438,7 @@
 
         var time = performance.now() * 0.001;
 
-        water.material.uniforms.time.value += 1.0 / 60.0;
+        crystal.material.uniforms.time.value += 1.0 / 60.0;
 
         renderer.render( scene, camera );
       }
