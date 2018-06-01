@@ -248,67 +248,67 @@
         var boxPositions = [
 
           // Only sets initial stair jump platforms
-          [20, 10, -280],
-          [20, -10, -280],
-          [20, 10, -300],
-          [20, -10, -300],
+          [20, 10, -380],
+          [20, -10, -380],
+          [20, 10, -400],
+          [20, -10, -400],
 
-          [40, 10, -340],
-          [40, -10, -340],
-          [40, 10, -360],
-          [40, -10, -360],
+          [40, 10, -440],
+          [40, -10, -440],
+          [40, 10, -460],
+          [40, -10, -460],
 
-          [60, 10, -400],
-          [60, -10, -400],
-          [60, 10, -420],
-          [60, -10, -420]
+          [60, 10, -500],
+          [60, -10, -500],
+          [60, 10, -520],
+          [60, -10, -520]
         ]
 
         function addToBoxPos(boxPos) {
 
           // Center platform
           for (var x = -70; x <= 70; x += 20) {
-            for (var z = -460; z >= -600; z -= 20) {
+            for (var z = -560; z >= -700; z -= 20) {
               boxPos.push([80, x, z]);
             }
           }
 
 					// Rings
 					for (var x = -140; x <= 140; x += 20) {
-						boxPos.push([130, x, -650]);
-						boxPos.push([130, x, -670]);
+						boxPos.push([130, x, -750]);
+						boxPos.push([130, x, -770]);
 					}
 
 					for (var x = -210; x <= 210; x += 20) {
-						boxPos.push([180, x, -720]);
-						boxPos.push([180, x, -740]);
+						boxPos.push([180, x, -820]);
+						boxPos.push([180, x, -840]);
 					}
 
 					for (var x = -280; x <= 280; x += 20) {
-						boxPos.push([240, x, -790]);
-						boxPos.push([240, x, -810]);
+						boxPos.push([240, x, -890]);
+						boxPos.push([240, x, -910]);
 					}
 
 					for (var x = -350; x <= 350; x += 20) {
-						boxPos.push([300, x, -860]);
-						boxPos.push([300, x, -880]);
+						boxPos.push([300, x, -960]);
+						boxPos.push([300, x, -980]);
 					}
 
-					for (var z = -460; z >= -640; z -= 20) {
+					for (var z = -560; z >= -740; z -= 20) {
 						boxPos.push([130, -120, z]);
 						boxPos.push([130, -140, z]);
 						boxPos.push([130, 120, z]);
 						boxPos.push([130, 140, z]);
 					}
 
-					for (var z = -460; z >= -710; z -= 20) {
+					for (var z = -560; z >= -810; z -= 20) {
 						boxPos.push([180, -190, z]);
 						boxPos.push([180, -210, z]);
 						boxPos.push([180, 190, z]);
 						boxPos.push([180, 210, z]);
 					}
 
-					for (var z = -460; z >= -780; z -= 20) {
+					for (var z = -560; z >= -880; z -= 20) {
 						console.log(z);
 						boxPos.push([240, -260, z]);
 						boxPos.push([240, -280, z]);
@@ -316,7 +316,7 @@
 						boxPos.push([240, 280, z]);
 					}
 
-					for (var z = -460; z >= -850; z -= 20) {
+					for (var z = -560; z >= -950; z -= 20) {
 						console.log(z);
 						boxPos.push([300, -330, z]);
 						boxPos.push([300, -350, z]);
@@ -356,7 +356,7 @@
 				var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 				sphere.position.y = 600;
 				sphere.position.x = 0;
-				sphere.position.z = -540;
+				sphere.position.z = -640;
 				scene.add( sphere );
 
         // Randomized box positions
@@ -373,7 +373,7 @@
 					var box = new THREE.Mesh( boxGeometry, boxMaterial );
           box.position.y = Math.floor( Math.random() * 20 ) * 40 + 300;
 					box.position.x = Math.floor( Math.random() * 20 - 10 ) * 40;
-					box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20 - 1100;
+					box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20 - 1200;
 					scene.add( box );
 					objects.push( box );
 				}
