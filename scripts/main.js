@@ -379,7 +379,7 @@ function animate() {
 }
 
 function sphereLoop () {
-  sphere.rotation.y += 0.001;
+  sphere.rotation.y += 0.003;
 
   requestAnimationFrame(sphereLoop);
 }
