@@ -51,6 +51,7 @@ body {
 }
 #directions {
   position: absolute;
+  bottom: 5px;
   background-color: transparent;
   display: none;
   flex-direction: column;
