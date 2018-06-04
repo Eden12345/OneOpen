@@ -16,14 +16,15 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.5);
 }
 #title {
   color: white;
   font-size: 200px;
   font-family: 'Raleway Dots', cursive;
-  text-shadow: 0px 0px 5px black;
+  text-shadow: 0px 0px 5px white;
   margin: 0;
+  text-align: center;
 }
 #start-button {
   /* width: 100%;
@@ -31,7 +32,7 @@ body {
   font-size: 40px;
   font-weight: 300;
   font-family: 'Raleway', sans-serif;
-  text-shadow: 0px 0px 5px black;
+  text-shadow: 0px 0px 5px white;
   display: -webkit-box;
   display: -moz-box;
   display: box;
@@ -47,7 +48,17 @@ body {
   color: #ffffff;
   text-align: center;
   cursor: pointer;
-  margin: 50px;
+  margin: 7vh;
+}
+#initial-directions {
+  width: 720px;
+  color: white;
+  font-size: 20px;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+  text-shadow: 0px 0px 5px black;
+  text-align: center;
+  margin: 7vh;
 }
 #directions {
   position: absolute;
