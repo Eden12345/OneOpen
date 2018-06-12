@@ -123,15 +123,22 @@ function init() {
   light.position.set( 0.5, 1, 0.75 );
   scene.add( light );
 
-  light2 = new THREE.DirectionalLight( 0xffffff, 0.6 );
-  scene.add( light2 );
-  light2.target.position.set(0, 0, -1);
-  scene.add( light2.target );
+  // Old lights (from original)
+  // light2 = new THREE.DirectionalLight( 0xffffff, 0.6 );
+  // scene.add( light2 );
+  // light2.target.position.set(0, 0, -1);
+  // scene.add( light2.target );
+  //
+  // light3 = new THREE.DirectionalLight( 0xffffff, 0.6 );
+  // scene.add( light3 );
+  // light3.target.position.set(1, -1, 3);
+  // scene.add( light3.target );
 
-  light3 = new THREE.DirectionalLight( 0xffffff, 0.6 );
-  scene.add( light3 );
-  light3.target.position.set(1, -1, 3);
-  scene.add( light3.target );
+  // New light 2 to go with SunSet skybox
+  light2 = new THREE.DirectionalLight( 0xffe6cc, 0.6 );
+  scene.add( light2 );
+  light2.target.position.set(-2.5, 2, 1);
+  scene.add( light2.target );
 
 
   // Add crystal floor using water module
@@ -146,7 +153,9 @@ function init() {
         }),
         alpha: 1.0,
         sunDirection: light2.position.clone().normalize(),
-        sunColor: 0xffffff,
+        // Old sunColor (from orginal)
+        // sunColor: 0xffffff,
+        sunColor: 0xffe6cc,
         waterColor: 0x001e0f,
         distortionScale:  0,
         size: 1,
@@ -154,7 +163,9 @@ function init() {
       }
     );
   crystal.rotation.x = - Math.PI / 2;
-  crystal.position.z = -1000;
+  // Old positioning to go with original skybox
+  // crystal.position.z = -1000;
+  crystal.position.z = -500;
   scene.add( crystal );
 
 
@@ -316,7 +327,7 @@ function init() {
 
     var boxMaterial = new THREE.MeshPhysicalMaterial( {
       //Color was 0xe6ffff (from original)
-      color: 0xffdd99
+      color: 0xffe6cc
     });
 
     var box = new THREE.Mesh( boxGeometry, boxMaterial );
@@ -335,7 +346,7 @@ function init() {
     var boxMaterial = new THREE.MeshPhysicalMaterial( {
       // map: marbleTexture,
       //Color was 0xffe6ff (from original)
-      color: 0xffdd99
+      color: 0x99c2ff
     });
     var box = new THREE.Mesh( boxGeometry, boxMaterial );
 
