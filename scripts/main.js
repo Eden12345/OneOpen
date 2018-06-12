@@ -97,8 +97,8 @@ function init() {
   scene.add( skybox );
 
 
-
-  scene.fog = new THREE.Fog( 0xffffff, 0, 1750 );
+  // Removing fog
+  // scene.fog = new THREE.Fog( 0xffffff, 0, 1750 );
 
   // Add lighting
   var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
@@ -112,7 +112,7 @@ function init() {
 
   light3 = new THREE.DirectionalLight( 0xffffff, 0.6 );
   scene.add( light3 );
-  light3.target.position.set(1, -1, 1);
+  light3.target.position.set(1, -1, 3);
   scene.add( light3.target );
 
 
@@ -196,21 +196,37 @@ function init() {
   // Array of box positions
   var boxPositions = [
 
+    // Old ones
+    // [20, 10, -380],
+    // [20, -10, -380],
+    // [20, 10, -400],
+    // [20, -10, -400],
+    //
+    // [40, 10, -440],
+    // [40, -10, -440],
+    // [40, 10, -460],
+    // [40, -10, -460],
+    //
+    // [60, 10, -500],
+    // [60, -10, -500],
+    // [60, 10, -520],
+    // [60, -10, -520]
+
     // Only sets initial stair jump platforms
-    [20, 10, -380],
-    [20, -10, -380],
-    [20, 10, -400],
-    [20, -10, -400],
+    [20, 10, -440],
+    [20, -10, -440],
+    [20, 10, -460],
+    [20, -10, -460],
 
-    [40, 10, -440],
-    [40, -10, -440],
-    [40, 10, -460],
-    [40, -10, -460],
+    [40, 10, -480],
+    [40, -10, -480],
+    [40, 10, -500],
+    [40, -10, -500],
 
-    [60, 10, -500],
-    [60, -10, -500],
     [60, 10, -520],
-    [60, -10, -520]
+    [60, -10, -520],
+    [60, 10, -540],
+    [60, -10, -540]
   ]
 
   function addToBoxPos(boxPos) {
@@ -281,7 +297,8 @@ function init() {
   for ( var i = 0; i < boxPositions.length; i ++ ) {
 
     var boxMaterial = new THREE.MeshPhysicalMaterial( {
-      color: 0xe6ffff
+      //Old color was 0xe6ffff
+      color: 0xffdd99
     });
 
     var box = new THREE.Mesh( boxGeometry, boxMaterial );
@@ -299,7 +316,8 @@ function init() {
 
     var boxMaterial = new THREE.MeshPhysicalMaterial( {
       // map: marbleTexture,
-      color: 0xffe6ff
+      //Old color was 0xffe6ff
+      color: 0xffdd99
     });
     var box = new THREE.Mesh( boxGeometry, boxMaterial );
 
@@ -317,7 +335,7 @@ function init() {
   var sphereGeometry = new THREE.SphereBufferGeometry( 200, 32, 32 );
   var sphereMaterial = new THREE.MeshPhysicalMaterial( {
     map: marbleTexture,
-    color: 0xffe6ff
+    // color: 0xffe6ff
   });
   sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
   sphere.position.y = 600;
