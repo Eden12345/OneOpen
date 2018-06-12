@@ -97,7 +97,7 @@ function init() {
   scene.add( skybox );
 
 
-  // Removing fog
+  // Removing fog (from original)
   // scene.fog = new THREE.Fog( 0xffffff, 0, 1750 );
 
   // Add lighting
@@ -196,7 +196,7 @@ function init() {
   // Array of box positions
   var boxPositions = [
 
-    // Old ones
+    // Old stair coordinates (from original)
     // [20, 10, -380],
     // [20, -10, -380],
     // [20, 10, -400],
@@ -297,7 +297,7 @@ function init() {
   for ( var i = 0; i < boxPositions.length; i ++ ) {
 
     var boxMaterial = new THREE.MeshPhysicalMaterial( {
-      //Old color was 0xe6ffff
+      //Color was 0xe6ffff (from original)
       color: 0xffdd99
     });
 
@@ -316,7 +316,7 @@ function init() {
 
     var boxMaterial = new THREE.MeshPhysicalMaterial( {
       // map: marbleTexture,
-      //Old color was 0xffe6ff
+      //Color was 0xffe6ff (from original)
       color: 0xffdd99
     });
     var box = new THREE.Mesh( boxGeometry, boxMaterial );
@@ -335,7 +335,7 @@ function init() {
   var sphereGeometry = new THREE.SphereBufferGeometry( 200, 32, 32 );
   var sphereMaterial = new THREE.MeshPhysicalMaterial( {
     map: marbleTexture,
-    // color: 0xffe6ff
+    // color: 0xffe6ff (from original)
   });
   sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
   sphere.position.y = 600;
