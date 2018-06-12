@@ -67,34 +67,34 @@ function init() {
 
   // Create skybox using sky module from water example
   // (commented out due to compatibility issues)
-  //
-  // scene.background = new THREE.Color( 0x944dff );
-  // var sky = new THREE.Sky();
-  // sky.scale.setScalar( 10000 );
-  // scene.add( sky );
-  // var uniforms = sky.material.uniforms;
-  // uniforms.turbidity.value = 10;
-  // uniforms.rayleigh.value = 2;
-  // uniforms.luminance.value = 10;
-  // uniforms.mieCoefficient.value = 0.005;
-  // uniforms.mieDirectionalG.value = 0.8;
+
+  scene.background = new THREE.Color( 0x944dff );
+  var sky = new THREE.Sky();
+  sky.scale.setScalar( 10000 );
+  scene.add( sky );
+  var uniforms = sky.material.uniforms;
+  uniforms.turbidity.value = 10;
+  uniforms.rayleigh.value = 2;
+  uniforms.luminance.value = 10;
+  uniforms.mieCoefficient.value = 0.005;
+  uniforms.mieDirectionalG.value = 0.8;
 
   // Create traditional skybox and load custom skybox textures
-  var faceArray = [];
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side1.png') }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side2.png' ) }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/ceil.png' ) }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/floor.png' ) }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side3.png' ) }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side4.png' ) }));
-  for (var i = 0; i < 6; i++) {
-    faceArray[i].side = THREE.BackSide;
-  }
-  var skyboxGeometry = new THREE.CubeGeometry( 3000, 3000, 3000, 1, 1, 1 );
-  var skybox = new THREE.Mesh( skyboxGeometry, faceArray );
-  skybox.position.z = -1000;
-  // skybox.position.y = ;
-  scene.add( skybox );
+  // var faceArray = [];
+  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side1.png') }));
+  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side2.png' ) }));
+  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/ceil.png' ) }));
+  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/floor.png' ) }));
+  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side3.png' ) }));
+  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side4.png' ) }));
+  // for (var i = 0; i < 6; i++) {
+  //   faceArray[i].side = THREE.BackSide;
+  // }
+  // var skyboxGeometry = new THREE.CubeGeometry( 3000, 3000, 3000, 1, 1, 1 );
+  // var skybox = new THREE.Mesh( skyboxGeometry, faceArray );
+  // skybox.position.z = -1000;
+  // // skybox.position.y = ;
+  // scene.add( skybox );
 
 
   // Removing fog (from original)
