@@ -62,7 +62,8 @@ animate();
 
 function init() {
   //Initiate camera with farther field of view to avoid skybox tearing
-  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 4200 );
+  //Old version was 4200 field of view (from original)
+  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 7000 );
   scene = new THREE.Scene();
 
   // Create skybox using sky module from water example
@@ -108,7 +109,7 @@ function init() {
   for (var i = 0; i < 6; i++) {
     faceArray[i].side = THREE.BackSide;
   }
-  var skyboxGeometry = new THREE.CubeGeometry( 3000, 3000, 3000, 1, 1, 1 );
+  var skyboxGeometry = new THREE.CubeGeometry( 5000, 5000, 5000, 1, 1, 1 );
   var skybox = new THREE.Mesh( skyboxGeometry, faceArray );
   skybox.position.z = -500;
   // skybox.position.y = ;
@@ -142,7 +143,8 @@ function init() {
 
 
   // Add crystal floor using water module
-  var floorGeometry = new THREE.PlaneBufferGeometry( 3100, 3100 );
+  // Old parameters for the PlaneBufferGeometry were 3100 and 3100 (from original)
+  var floorGeometry = new THREE.PlaneBufferGeometry( 5100, 5100 );
     crystal = new THREE.Water(
       floorGeometry,
       {
