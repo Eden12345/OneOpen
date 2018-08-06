@@ -4,7 +4,7 @@ This is a three-dimensional digital space that you can explore from a first pers
 
 The copyright license for the marble image I used is in the textures folder, and you can find the crystal normal I used for the floor, as well as other great texture packs, [here](https://3dtextures.me/author/gendosplace/). You can find the set of skyboxes that has the sunset skybox I used [here](https://93i.de/p/free-skybox-texture-set/).
 
-[Live Demo](http://ethangooding.com/3JSPlayground/)
+[Live Demo](http://ethangooding.com/OneOpen/)
 
 ## Why not a traditional platformer?
 
