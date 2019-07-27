@@ -62,12 +62,12 @@ animate();
 
 function init() {
   //Initiate camera with farther field of view to avoid skybox tearing
-  //Old version was 4200 field of view (from original)
-  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 7000 );
+  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 4200 );
   scene = new THREE.Scene();
 
   // Create skybox using sky module from water example
-  // (removed due to compatibility issues)
+  // (commented out due to compatibility issues)
+  //
   // scene.background = new THREE.Color( 0x944dff );
   // var sky = new THREE.Sky();
   // sky.scale.setScalar( 10000 );
@@ -79,72 +79,45 @@ function init() {
   // uniforms.mieCoefficient.value = 0.005;
   // uniforms.mieDirectionalG.value = 0.8;
 
-
-  // Create traditional skybox and load custom skybox textures (from original)
-  // var faceArray = [];
-  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side1.png') }));
-  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side2.png' ) }));
-  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/ceil.png' ) }));
-  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/floor.png' ) }));
-  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side3.png' ) }));
-  // faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side4.png' ) }));
-  // for (var i = 0; i < 6; i++) {
-  //   faceArray[i].side = THREE.BackSide;
-  // }
-  // var skyboxGeometry = new THREE.CubeGeometry( 3000, 3000, 3000, 1, 1, 1 );
-  // var skybox = new THREE.Mesh( skyboxGeometry, faceArray );
-  // skybox.position.z = -1000;
-  // // skybox.position.y = ;
-  // scene.add( skybox );
-
-
-  // Create traditional skybox and load SunSet skybox textures
+  // Create traditional skybox and load custom skybox textures
   var faceArray = [];
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/SunSet/left.png' ) }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/SunSet/right.png' ) }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/SunSet/up.png' ) }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/SunSet/down.png' ) }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/SunSet/front.png' ) }));
-  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/SunSet/back.png' ) }));
+  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side1.png') }));
+  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side2.png' ) }));
+  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/ceil.png' ) }));
+  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/floor.png' ) }));
+  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side3.png' ) }));
+  faceArray.push(new THREE.MeshBasicMaterial( { map: new THREE.TextureLoader().load('./textures/Custom_skybox/side4.png' ) }));
   for (var i = 0; i < 6; i++) {
     faceArray[i].side = THREE.BackSide;
   }
-  var skyboxGeometry = new THREE.CubeGeometry( 5000, 5000, 5000, 1, 1, 1 );
+  var skyboxGeometry = new THREE.CubeGeometry( 3000, 3000, 3000, 1, 1, 1 );
   var skybox = new THREE.Mesh( skyboxGeometry, faceArray );
-  skybox.position.z = -500;
+  skybox.position.z = -1000;
   // skybox.position.y = ;
   scene.add( skybox );
 
 
-  // Removing fog (from original)
-  // scene.fog = new THREE.Fog( 0xffffff, 0, 1750 );
+
+  scene.fog = new THREE.Fog( 0xffffff, 0, 1750 );
 
   // Add lighting
   var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
   light.position.set( 0.5, 1, 0.75 );
   scene.add( light );
 
-  // Old lights (from original)
-  // light2 = new THREE.DirectionalLight( 0xffffff, 0.6 );
-  // scene.add( light2 );
-  // light2.target.position.set(0, 0, -1);
-  // scene.add( light2.target );
-  //
-  // light3 = new THREE.DirectionalLight( 0xffffff, 0.6 );
-  // scene.add( light3 );
-  // light3.target.position.set(1, -1, 3);
-  // scene.add( light3.target );
-
-  // New light 2 to go with SunSet skybox
-  light2 = new THREE.DirectionalLight( 0xffe6cc, 0.6 );
+  light2 = new THREE.DirectionalLight( 0xffffff, 0.6 );
   scene.add( light2 );
-  light2.target.position.set(-2.5, 2, 1);
+  light2.target.position.set(0, 0, -1);
   scene.add( light2.target );
+
+  light3 = new THREE.DirectionalLight( 0xffffff, 0.6 );
+  scene.add( light3 );
+  light3.target.position.set(1, -1, 1);
+  scene.add( light3.target );
 
 
   // Add crystal floor using water module
-  // Old parameters for the PlaneBufferGeometry were 3100 and 3100 (from original)
-  var floorGeometry = new THREE.PlaneBufferGeometry( 5100, 5100 );
+  var floorGeometry = new THREE.PlaneBufferGeometry( 3100, 3100 );
     crystal = new THREE.Water(
       floorGeometry,
       {
@@ -155,9 +128,7 @@ function init() {
         }),
         alpha: 1.0,
         sunDirection: light2.position.clone().normalize(),
-        // Old sunColor (from orginal)
-        // sunColor: 0xffffff,
-        sunColor: 0xffe6cc,
+        sunColor: 0xffffff,
         waterColor: 0x001e0f,
         distortionScale:  0,
         size: 1,
@@ -165,9 +136,7 @@ function init() {
       }
     );
   crystal.rotation.x = - Math.PI / 2;
-  // Old positioning to go with original skybox
-  // crystal.position.z = -1000;
-  crystal.position.z = -500;
+  crystal.position.z = -1000;
   scene.add( crystal );
 
 
@@ -227,37 +196,21 @@ function init() {
   // Array of box positions
   var boxPositions = [
 
-    // Old stair coordinates (from original)
-    // [20, 10, -380],
-    // [20, -10, -380],
-    // [20, 10, -400],
-    // [20, -10, -400],
-    //
-    // [40, 10, -440],
-    // [40, -10, -440],
-    // [40, 10, -460],
-    // [40, -10, -460],
-    //
-    // [60, 10, -500],
-    // [60, -10, -500],
-    // [60, 10, -520],
-    // [60, -10, -520]
-
     // Only sets initial stair jump platforms
-    [20, 10, -440],
-    [20, -10, -440],
-    [20, 10, -460],
-    [20, -10, -460],
+    [20, 10, -380],
+    [20, -10, -380],
+    [20, 10, -400],
+    [20, -10, -400],
 
-    [40, 10, -480],
-    [40, -10, -480],
-    [40, 10, -500],
-    [40, -10, -500],
+    [40, 10, -440],
+    [40, -10, -440],
+    [40, 10, -460],
+    [40, -10, -460],
 
+    [60, 10, -500],
+    [60, -10, -500],
     [60, 10, -520],
-    [60, -10, -520],
-    [60, 10, -540],
-    [60, -10, -540]
+    [60, -10, -520]
   ]
 
   function addToBoxPos(boxPos) {
@@ -328,8 +281,7 @@ function init() {
   for ( var i = 0; i < boxPositions.length; i ++ ) {
 
     var boxMaterial = new THREE.MeshPhysicalMaterial( {
-      //Color was 0xe6ffff (from original)
-      color: 0xffe6cc
+      color: 0xe6ffff
     });
 
     var box = new THREE.Mesh( boxGeometry, boxMaterial );
@@ -347,8 +299,7 @@ function init() {
 
     var boxMaterial = new THREE.MeshPhysicalMaterial( {
       // map: marbleTexture,
-      //Color was 0xffe6ff (from original)
-      color: 0x99c2ff
+      color: 0xffe6ff
     });
     var box = new THREE.Mesh( boxGeometry, boxMaterial );
 
@@ -366,7 +317,7 @@ function init() {
   var sphereGeometry = new THREE.SphereBufferGeometry( 200, 32, 32 );
   var sphereMaterial = new THREE.MeshPhysicalMaterial( {
     map: marbleTexture,
-    // color: 0xffe6ff (from original)
+    color: 0xffe6ff
   });
   sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
   sphere.position.y = 600;
